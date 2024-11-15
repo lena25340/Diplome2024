@@ -1,14 +1,14 @@
 import allure
 import requests
+from url import *
 
-base_upl1="https://avia-new.fstravel.com/api/v1"
-base_upl2="https://fstravel.com/api"
+
 @allure.id('1')
 @allure.title('Проверить по городу')
 @allure.description('Тест проверят возврат кода 200 при отправке запроса на поиск города Душанбе')
 @allure.severity('Normal')
 def test_search_by_origin():
-    response=requests.get(f'{base_upl1}/cities/search?value=DYU')
+    response = requests.get(f'{base_upl1}/cities/search?value=DYU')
     assert response.status_code == 200
 
 
@@ -17,7 +17,7 @@ def test_search_by_origin():
 @allure.description('Тест проверят возврат кода 200 при отправке запроса по городам направления')
 @allure.severity('Normal')
 def test_search_by_cities():
-    response=requests.get(f'{base_upl2}/filters/DepartureCities')
+    response = requests.get(f'{base_upl2}/filters/DepartureCities')
     assert response.status_code == 200
 
 
@@ -26,7 +26,7 @@ def test_search_by_cities():
 @allure.description('Тест проверят возврат кода 200 при отправке запроса по популярным городам')
 @allure.severity('Normal')
 def test_search_by_popularcities():
-    response=requests.get('https://avia-new.fstravel.com/api/avia/external/cities/get-popular-cities')
+    response = requests.get('https://avia-new.fstravel.com/api/avia/external/cities/get-popular-cities')
     assert response.status_code == 200
 
 
@@ -35,7 +35,7 @@ def test_search_by_popularcities():
 @allure.description('Тест проверят возврат кода 200 при отправке билеты из Москвы')
 @allure.severity('Normal')
 def test_search_by_wishList():
-    response=requests.get(f'{base_upl2}/search/wishList')
+    response = requests.get(f'{base_upl2}/search/wishList')
     assert response.status_code == 200
 
 
@@ -43,7 +43,7 @@ def test_search_by_wishList():
 @allure.title('Проверить города из Москвы')
 @allure.description('Тест проверят возврат кода 200 при отправке из Москвы')
 @allure.severity('Normal')
-def test_search_by_Moskow():
-    response=requests.get(f'{base_upl1}/cities/search?value=MOW')
+def test_search_by_moskow():
+    response = requests.get(f'{base_upl1}/cities/search?value=MOW')
     assert response.status_code == 200
 
