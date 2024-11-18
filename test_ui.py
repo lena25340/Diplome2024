@@ -4,15 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome()
-    driver.implicitly_wait(10)
-    driver.maximize_window()
-    yield driver
-    driver.quit()
-
+from advert import Advert
 
 @allure.id('1')
 @allure.title('Проверить автозаполнение')
@@ -21,7 +13,8 @@ def driver():
 def test_check_autofill_moscow(driver):
     driver.get("https://fstravel.com/avia")
     try:
-        driver.find_element(By.CSS_SELECTOR, ".popmechanic-close").click()
+        close_advert = Advert(driver)
+        close_advert.close_advert()
     except:
        pass
     assert "MOW" in driver.find_element(By.CSS_SELECTOR, ".v-select__iata").text
@@ -34,7 +27,8 @@ def test_check_autofill_moscow(driver):
 def test_negative_empty_field(driver):
     driver.get("https://fstravel.com/avia")
     try:
-        driver.find_element(By.CSS_SELECTOR, ".popmechanic-close").click()
+       close_advert = Advert(driver)
+       close_advert.close_advert()
     except:
        pass
     driver.find_element(By.CSS_SELECTOR, ".v-search-button").click()
@@ -48,7 +42,8 @@ def test_negative_empty_field(driver):
 def test_header(driver):
     driver.get("https://fstravel.com/searchhotel")
     try:
-        driver.find_element(By.CSS_SELECTOR, ".popmechanic-close").click()
+        close_advert = Advert(driver)
+        close_advert.close_advert()
     except:
        pass
     assert "Бронирование отелей" in driver.find_element(By.CSS_SELECTOR, ".meta-h1").text
@@ -61,7 +56,8 @@ def test_header(driver):
 def test_search_tour(driver):
     driver.get("https://fstravel.com/searchtour")
     try:
-        driver.find_element(By.CSS_SELECTOR, ".popmechanic-close").click()
+       close_advert = Advert(driver)
+       close_advert.close_advert()
     except:
        pass
     wait = WebDriverWait(driver, 15)
@@ -79,7 +75,8 @@ def test_search_tour(driver):
 def test_tour_request(driver):
     driver.get("https://fstravel.com/avia")
     try:
-        driver.find_element(By.CSS_SELECTOR, ".popmechanic-close").click()
+       close_advert = Advert(driver)
+       close_advert.close_advert()
     except:
        pass
     driver.find_element(By.CSS_SELECTOR, ".v-header-left-link").click()
